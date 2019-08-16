@@ -58,12 +58,15 @@ public class BibliotecaAppTests {
     public void shouldPrintWelcomeMessageAndBookListAtStart() {
         //Given
         bookList.add(new Book("Like Water for Chocolate", "Laura Esquivel", 1992));
+        bookList.add(new Book("Caramelo", "Sandra Cisneros", 2002));
 
         //When
         testApp.start(printer, bookList);
 
         //Then
-        assertThat(output.toString(), is("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore\nLike Water for Chocolate, Laura Esquivel, 1992\n"));
+        assertThat(output.toString(), is("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore\n" +
+                "Like Water for Chocolate, Laura Esquivel, 1992\n" +
+                "Caramelo, Sandra Cisneros, 2002\n"));
     }
 
 }
