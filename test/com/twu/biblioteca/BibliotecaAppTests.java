@@ -3,7 +3,7 @@ package com.twu.biblioteca;
 
 import com.sun.xml.internal.bind.v2.util.ByteArrayOutputStreamEx;
 import org.hamcrest.CoreMatchers;
-import org.junit.Test;
+import org.junit.*;
 
 //import static org.hamcrest.core.Is.is;
 //import static org.junit.Assert.*;
@@ -19,33 +19,51 @@ import java.util.*;
 
 public class BibliotecaAppTests {
 
-    @Test
-    public void shouldPrintWelcomeMessageAtStart() {
-        //Given
-        BibliotecaApp testApp = new BibliotecaApp();
-        ByteArrayOutputStream byteArr = new ByteArrayOutputStream();
-        PrintStream printer = new PrintStream(byteArr);
+    //Given
+    BibliotecaApp testApp;
+    ByteArrayOutputStream output;
+    PrintStream printer;
+    List<String> bookList;
 
+    @Before
+    public void setUp(){
+        testApp = new BibliotecaApp();
+        output = new ByteArrayOutputStream();
+        printer = new PrintStream(output);
+        bookList = Arrays.asList("1984", "Mockingbird", "The Hobbit");
+    }
+
+
+    @Test
+    public void shouldPrintWelcomeMessage() {
+        //Given setUp()
 
         //When
-        testApp.start(printer);
+        testApp.printWelcome(printer);
 
         //Then
-        assertThat(byteArr.toString(), is("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore"));
+        assertThat(output.toString(), is("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore\n"));
     }
 
     @Test
-    public void shouldPrintListOfBooksAtStart() {
-        //Given
-        BibliotecaApp testApp = new BibliotecaApp();
-        ByteArrayOutputStream bookByteArr = new ByteArrayOutputStreamEx();
-        PrintStream printer = new PrintStream(bookByteArr);
-        List<String> bookList = Arrays.asList("1984", "Mockingbird", "The Hobbit");
+    public void shouldPrintListOfBooks() {
+        //Given setUp
 
         //When
         testApp.printBookList(printer, bookList);
 
         //Then
-        assertThat(bookByteArr.toString(), is("1984\nMockingbird\nThe Hobbit\n"));
+        assertThat(output.toString(), is("1984\nMockingbird\nThe Hobbit\n"));
+    }
+
+    @Test
+    public void shouldPrintWelcomeMessageAndBookListAtStart() {
+        //Given setUp
+
+        //When
+        testApp.start(printer, bookList);
+
+        //Then
+        assertThat(output.toString(), is("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore\n1984\nMockingbird\nThe Hobbit\n"));
     }
 }
