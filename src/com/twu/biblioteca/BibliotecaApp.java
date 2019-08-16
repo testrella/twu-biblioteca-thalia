@@ -8,14 +8,13 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.*;
 
-public class BibliotecaApp {
-
+public class BibliotecaApp<Books> {
 
     public BibliotecaApp(){
 
     }
 
-    public void start(PrintStream printer, List<String> bookList) {
+    public void start(PrintStream printer, List<Book> bookList) {
         printWelcome(printer);
         printBookList(printer, bookList);
     }
@@ -24,8 +23,8 @@ public class BibliotecaApp {
         printer.print("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore\n");
     }
 
-    protected void printBookList(PrintStream printer, List<String> bookList) {
-        for (String book : bookList)
-            printer.println(book);
+    protected void printBookList(PrintStream printer, List<Book> bookList) {
+        for (Book book : bookList)
+            printer.println(book.toString());
     }
 }

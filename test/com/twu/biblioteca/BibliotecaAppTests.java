@@ -19,7 +19,7 @@ public class BibliotecaAppTests {
     BibliotecaApp testApp;
     ByteArrayOutputStream output;
     PrintStream printer;
-    List<String> bookList;
+    List<Book> bookList;
 
     @Before
     public void setUp() throws Exception {
@@ -27,7 +27,7 @@ public class BibliotecaAppTests {
         testApp = new BibliotecaApp();
         output = new ByteArrayOutputStream();
         printer = new PrintStream(output);
-        bookList = Arrays.asList("1984", "Mockingbird", "The Hobbit");
+        bookList = new ArrayList<Book>();
     }
 
 
@@ -44,23 +44,26 @@ public class BibliotecaAppTests {
 
     @Test
     public void shouldPrintListOfBooks() {
-        //Given setUp
+        //Given
+        bookList.add(new Book("Like Water for Chocolate", "Laura Esquivel", 1992));
 
         //When
         testApp.printBookList(printer, bookList);
 
         //Then
-        assertThat(output.toString(), is("1984\nMockingbird\nThe Hobbit\n"));
+        assertThat(output.toString(), is("Like Water for Chocolate, Laura Esquivel, 1992\n"));
     }
 
     @Test
     public void shouldPrintWelcomeMessageAndBookListAtStart() {
-        //Given setUp
+        //Given
+        bookList.add(new Book("Like Water for Chocolate", "Laura Esquivel", 1992));
 
         //When
         testApp.start(printer, bookList);
 
         //Then
-        assertThat(output.toString(), is("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore\n1984\nMockingbird\nThe Hobbit\n"));
+        assertThat(output.toString(), is("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore\nLike Water for Chocolate, Laura Esquivel, 1992\n"));
     }
+
 }
