@@ -20,19 +20,7 @@ import java.util.*;
 public class BibliotecaAppTests {
 
     @Test
-    public void welcomeMessageShouldSay() {
-        //Given
-        BibliotecaApp testApp = new BibliotecaApp();
-
-        //When
-        String result = testApp.sayWelcome();
-
-        //Then
-        assertThat(result, is("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore"));
-    }
-
-    @Test
-    public void printsWelcomeMessageToStream() {
+    public void shouldPrintWelcomeMessageAtStart() {
         //Given
         BibliotecaApp testApp = new BibliotecaApp();
         ByteArrayOutputStream byteArr = new ByteArrayOutputStream();
@@ -40,14 +28,14 @@ public class BibliotecaAppTests {
 
 
         //When
-        testApp.printWelcomeMessage(printer);
+        testApp.start(printer);
 
         //Then
         assertThat(byteArr.toString(), is("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore"));
     }
 
     @Test
-    public void printsListOfBooksToStream() {
+    public void shouldPrintListOfBooksAtStart() {
         //Given
         BibliotecaApp testApp = new BibliotecaApp();
         ByteArrayOutputStream bookByteArr = new ByteArrayOutputStreamEx();

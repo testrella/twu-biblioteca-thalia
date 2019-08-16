@@ -13,16 +13,12 @@ public class BibliotecaApp {
     public BibliotecaApp(){
 
     }
-    public String sayWelcome(){
-        return("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore");
-    }
-
 
     public static void main(String[] args) {
         System.out.println("Hello, world!");
     }
 
-    public void printWelcomeMessage(PrintStream printer) {
+    public void start(PrintStream printer) {
         printer.print("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore");
     }
 
