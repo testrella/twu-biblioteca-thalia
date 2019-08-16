@@ -5,9 +5,6 @@ import com.sun.xml.internal.bind.v2.util.ByteArrayOutputStreamEx;
 import org.hamcrest.CoreMatchers;
 import org.junit.*;
 
-//import static org.hamcrest.core.Is.is;
-//import static org.junit.Assert.*;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -19,14 +16,14 @@ import java.util.*;
 
 public class BibliotecaAppTests {
 
-    //Given
     BibliotecaApp testApp;
     ByteArrayOutputStream output;
     PrintStream printer;
     List<String> bookList;
 
     @Before
-    public void setUp(){
+    public void setUp() throws Exception {
+        //Given
         testApp = new BibliotecaApp();
         output = new ByteArrayOutputStream();
         printer = new PrintStream(output);
