@@ -6,6 +6,7 @@ import java.io.PrintStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.*;
 
 public class BibliotecaApp {
 
@@ -23,5 +24,10 @@ public class BibliotecaApp {
 
     public void printWelcomeMessage(PrintStream printer) {
         printer.print("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore");
+    }
+
+    public void printBookList(PrintStream printer, List<String> bookList) {
+        for (String book : bookList)
+            printer.println(book);
     }
 }
