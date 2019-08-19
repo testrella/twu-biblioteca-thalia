@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 
 public class BibliotecaAppTests {
@@ -70,12 +70,39 @@ public class BibliotecaAppTests {
 
     }
 
+    /**
     @Test
     public void shouldCloseScannerWhenUserQuits(){
         //Given
 
         //When
-        //testApp.start();
+        testApp.start();
+
+        //Then
+        assertThat()
+    }
+    */
+
+    @Test
+    public void shouldReportFalseIfBookIsCheckedOut(){
+        //Given
+        bookList.add(new Book("Like Water for Chocolate", "Laura Esquivel", 1992));
+        bookList.add(new Book("Caramelo", "Sandra Cisneros", 2002));
+        String bookTitle = "Caramelo";
+        Book bookToBeRemoved = null;
+
+        //When
+        testApp.checkoutBook(bookTitle);
+
+        //Then
+
+        for (Book book : bookList){
+            if (book.getTitle().equals(bookTitle)){
+                bookToBeRemoved = book;
+            }
+        }
+        assertFalse(bookList.contains(bookToBeRemoved));
+
     }
 
 

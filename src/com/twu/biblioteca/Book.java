@@ -16,4 +16,10 @@ public class Book {
         return String.join(", ", title, author, Integer.toString(year));
     }
 
+    public String getTitle(){
+        return this.title;
+    }
+
+
+
 }

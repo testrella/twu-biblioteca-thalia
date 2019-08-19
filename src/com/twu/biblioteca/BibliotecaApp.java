@@ -1,15 +1,15 @@
 package com.twu.biblioteca;
 
+import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.List;
-import java.io.ByteArrayOutputStream;
-
 
 public class BibliotecaApp<Books> {
     ByteArrayOutputStream output;
     PrintStream printer;
     List<Book> bookList;
     ScannerWrapper scanner;
+    List<Books> checkedOutBooks;
 
     public BibliotecaApp(ByteArrayOutputStream output, PrintStream printer, List<Book> bookList, ScannerWrapper scanner){
         this.output = output;
@@ -35,25 +35,34 @@ public class BibliotecaApp<Books> {
             printer.println(book.toString());
     }
 
-    protected void printMenu(){
+    protected void printMenu() {
         printer.print("Menu:\n" + "For list of books press 1\n");
     }
 
-    protected void readInput(){
+    protected void readInput() {
         String input = scanner.nextLine();
         if(input.equals("1")){
             printBookList();
         }
-        if(input.equals("Q")){
+        if(input.equals("Q")) {
             quit();
         }
         else{
             printer.print("Please select a valid option");
         }
     }
-    protected void quit(){
+    protected void quit() {
         printer.print("You have quit the app\n");
     }
 
 
+    public void checkoutBook(String bookTitle) {
+        Book bookToBeRemoved = null;
+        for (Book book : bookList) {
+            if (book.getTitle().equals(bookTitle)) {
+                bookToBeRemoved = book;
+            }
+        }
+            bookList.remove(bookToBeRemoved);
+    }
 }
