@@ -58,15 +58,32 @@ public class BibliotecaApp<Books> {
 
     public void checkoutBook(String bookTitle) {
         Book bookToBeRemoved = null;
-        for (Book book : bookList) {
-            if (book.getTitle().equals(bookTitle)) {
-                bookToBeRemoved = book;
+        boolean available = isBookAvailable(bookTitle);
+
+        if (available) {
+            for (Book book : bookList) {
+                if (book.getTitle().equals(bookTitle)) {
+                    bookToBeRemoved = book;
+                }
             }
-        }
             removeBookFromList(bookToBeRemoved);
+            printer.print("Thank you! Enjoy the book");
+        }
+
+    }
+
+    protected boolean isBookAvailable(String bookTitle){
+        boolean isAvailable = false;
+        for (Book book : bookList) {
+            if(book.getTitle().equals(bookTitle))
+                isAvailable = true;
+            }
+        return isAvailable;
     }
 
     protected void removeBookFromList(Book bookToBeRemoved){
-        bookList.remove(bookToBeRemoved);
+        if (bookToBeRemoved != null) {
+            bookList.remove(bookToBeRemoved);
+        }
     }
 }

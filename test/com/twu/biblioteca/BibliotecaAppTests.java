@@ -29,6 +29,8 @@ public class BibliotecaAppTests {
         bookList = new ArrayList<Book>();
         mockScanner = new MockScannerWrapper();
         testApp = new BibliotecaApp(output, printer, bookList, mockScanner);
+        bookList.add(new Book("Like Water for Chocolate", "Laura Esquivel", 1992));
+        bookList.add(new Book("Caramelo", "Sandra Cisneros", 2002));
     }
 
 
@@ -45,14 +47,13 @@ public class BibliotecaAppTests {
 
     @Test
     public void shouldPrintListOfBooks() {
-        //Given
-        bookList.add(new Book("Like Water for Chocolate", "Laura Esquivel", 1992));
+        //Given setUp()
 
         //When
         testApp.printBookList();
 
         //Then
-        assertThat(output.toString(), is("Like Water for Chocolate, Laura Esquivel, 1992\n"));
+        assertThat(output.toString(), is("Like Water for Chocolate, Laura Esquivel, 1992\n" + "Caramelo, Sandra Cisneros, 2002\n"));
     }
 
 
@@ -84,10 +85,19 @@ public class BibliotecaAppTests {
     */
 
     @Test
+    public void shouldReportTrueIfBookIsAvailable(){
+        //Given
+        String bookTitle = "Caramelo";
+        Book bookToBeRemoved = null;
+
+        boolean available = testApp.isBookAvailable(bookTitle);
+
+        assertTrue(available);
+    }
+
+    @Test
     public void shouldReportFalseIfBookIsCheckedOut(){
         //Given
-        bookList.add(new Book("Like Water for Chocolate", "Laura Esquivel", 1992));
-        bookList.add(new Book("Caramelo", "Sandra Cisneros", 2002));
         String bookTitle = "Caramelo";
         Book bookToBeRemoved = null;
 
@@ -101,6 +111,22 @@ public class BibliotecaAppTests {
             }
         }
         assertFalse(bookList.contains(bookToBeRemoved));
+
+    }
+
+    @Test
+    public void shouldPrintThankYouMessageWhenBookIsCheckedOut(){
+        //Given setUp()
+        String bookTitle = "Caramelo";
+        Book bookToBeRemoved = null;
+        String expected = "Thank you! Enjoy the book";
+
+        //When
+        testApp.checkoutBook(bookTitle);
+
+        //Then
+        assertThat(output.toString(), is(expected));
+
 
     }
 
