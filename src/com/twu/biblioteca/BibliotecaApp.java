@@ -63,6 +63,10 @@ public class BibliotecaApp<Books> {
                 bookToBeRemoved = book;
             }
         }
-            bookList.remove(bookToBeRemoved);
+            removeBookFromList(bookToBeRemoved);
+    }
+
+    protected void removeBookFromList(Book bookToBeRemoved){
+        bookList.remove(bookToBeRemoved);
     }
 }

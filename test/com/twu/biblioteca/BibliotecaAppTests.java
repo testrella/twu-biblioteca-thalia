@@ -95,7 +95,6 @@ public class BibliotecaAppTests {
         testApp.checkoutBook(bookTitle);
 
         //Then
-
         for (Book book : bookList){
             if (book.getTitle().equals(bookTitle)){
                 bookToBeRemoved = book;
