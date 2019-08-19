@@ -96,6 +96,17 @@ public class BibliotecaAppTests {
     }
 
     @Test
+    public void shouldReportFalseIfBookIsNotAvailable(){
+        //Given
+        String bookTitle = "Not Your Perfect Mexican Daughter";
+        Book bookToBeRemoved = null;
+
+        boolean available = testApp.isBookAvailable(bookTitle);
+
+        assertFalse(available);
+    }
+
+    @Test
     public void shouldReportFalseIfBookIsCheckedOut(){
         //Given
         String bookTitle = "Caramelo";
@@ -127,7 +138,20 @@ public class BibliotecaAppTests {
         //Then
         assertThat(output.toString(), is(expected));
 
+    }
 
+    @Test
+    public void shouldPrintSorryMessageWhenBookIsNotAvailable() {
+        //Given setUp()
+        String bookTitle = "Not Your Perfect Mexican Daughter";
+        Book bookToBeRemoved = null;
+        String expected = "Sorry, that book is not available";
+
+        //When
+        testApp.checkoutBook(bookTitle);
+
+        //Then
+        assertThat(output.toString(), is(expected));
     }
 
 
