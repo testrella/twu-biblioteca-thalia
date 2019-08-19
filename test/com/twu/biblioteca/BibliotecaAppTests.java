@@ -24,11 +24,11 @@ public class BibliotecaAppTests {
     @Before
     public void setUp() throws Exception {
         //Given
-        testApp = new BibliotecaApp();
         output = new ByteArrayOutputStream();
         printer = new PrintStream(output);
         bookList = new ArrayList<Book>();
         mockScanner = new MockScannerWrapper();
+        testApp = new BibliotecaApp(output, printer, bookList, mockScanner);
     }
 
 
@@ -37,7 +37,7 @@ public class BibliotecaAppTests {
         //Given setUp()
 
         //When
-        testApp.printWelcome(printer);
+        testApp.printWelcome();
 
         //Then
         assertThat(output.toString(), is("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore\n"));
@@ -49,25 +49,34 @@ public class BibliotecaAppTests {
         bookList.add(new Book("Like Water for Chocolate", "Laura Esquivel", 1992));
 
         //When
-        testApp.printBookList(printer, bookList);
+        testApp.printBookList();
 
         //Then
         assertThat(output.toString(), is("Like Water for Chocolate, Laura Esquivel, 1992\n"));
     }
-    
+
+
 
     @Test
-    public void shouldReadUserInputAtStartAndReportInvalidOptionWhenPress2(){
+    public void shouldQuitWhenUserInputIsQ(){
         //Given
-        String expected =( "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore\n" + "Menu:\n" + "For list of books press 1\n" + "Please select a valid option");
-        bookList.add(new Book("Caramelo", "Sandra Cisneros", 2002));
+        String expected = "Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore\n" + "Menu:\n" + "For list of books press 1\n" +"You have quit the app\n";
 
         //When
-        testApp.start(printer, bookList, mockScanner);
+        testApp.start();
 
         //Then
         assertThat(output.toString(), is(expected));
 
     }
+
+    @Test
+    public void shouldCloseScannerWhenUserQuits(){
+        //Given
+
+        //When
+        //testApp.start();
+    }
+
 
 }

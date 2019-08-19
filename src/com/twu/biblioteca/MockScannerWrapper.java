@@ -1,6 +1,9 @@
 package com.twu.biblioteca;
 public class MockScannerWrapper extends ScannerWrapper {
+
+    @Override
     public String nextLine() {
-        return "2";
+        return "Q";
     }
+
 }
