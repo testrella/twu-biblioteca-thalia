@@ -1,22 +1,20 @@
 package com.twu.biblioteca;
 
-import com.sun.xml.internal.bind.v2.util.ByteArrayOutputStreamEx;
-
 import java.io.PrintStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.*;
+import java.util.List;
 
 public class BibliotecaApp<Books> {
 
     public BibliotecaApp(){
 
+
     }
 
-    public void start(PrintStream printer, List<Book> bookList) {
+    public void start(PrintStream printer, List<Book> bookList, ScannerWrapper scanner) {
         printWelcome(printer);
-        printBookList(printer, bookList);
+        printMenu(printer);
+        readInput(printer, scanner);
+
     }
 
     protected void printWelcome(PrintStream printer){
@@ -27,4 +25,18 @@ public class BibliotecaApp<Books> {
         for (Book book : bookList)
             printer.println(book.toString());
     }
+
+    protected void printMenu(PrintStream printer){
+        printer.print("Menu:\n" + "For list of books press 1\n");
+    }
+
+    protected void readInput(PrintStream printer, ScannerWrapper scanner){
+        String input = scanner.nextLine();
+        if(!input.equals("1")){
+            printer.print("Please select a valid option");
+        }
+
+    }
+
+
 }
